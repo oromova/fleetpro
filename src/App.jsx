@@ -1,4 +1,5 @@
 import KpiCard from './components/KpiCard'
+import ShipmentsTable from './components/ShipmentsTable';
 import StatusBadge from './components/StatusBadge';
 import { shipments } from './data/mockShipments'
 
@@ -16,7 +17,10 @@ export default function App() {
           <KpiCard title="Yo'lda" value={countByStatus('in_transit')} />
           <KpiCard title="Yetkazilgan" value={countByStatus('delivered')} />
           <KpiCard title="Kechikkan" value={countByStatus('delayed')} />
-          <StatusBadge status="in_transit" />
+        </section>
+
+        <section className="mt-6">
+          <ShipmentsTable shipments={shipments} />
         </section>
       </main>
     </div>
