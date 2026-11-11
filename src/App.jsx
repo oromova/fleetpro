@@ -1,14 +1,20 @@
+import { useState } from 'react';
 import KpiCard from './components/KpiCard'
 import ShipmentsTable from './components/ShipmentsTable';
-import StatusBadge from './components/StatusBadge';
 import { shipments } from './data/mockShipments'
+import Header from './components/Header'
 
 const countByStatus = (status) =>
   shipments.filter((shipment) => shipment.status === status).length
 
 export default function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-slate-100">
+      {/* Header */}
+      <Header/>
+      
       <main className="mx-auto max-w-6xl p-4">
         <h1 className="text-2xl font-bold text-slate-900">FleetPro</h1>
 
