@@ -1,6 +1,13 @@
 import StatusBadge from './StatusBadge'
 
 export default function ShipmentsTable({ shipments }) {
+
+  if (shipments.length === 0) {
+    return (
+      <p className="rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500" role='status'>Yuk topilmadi</p>
+    )
+  }
+
   return (
     <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
       <table className="w-full text-left text-sm">

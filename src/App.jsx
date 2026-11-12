@@ -4,12 +4,31 @@ import ShipmentsTable from './components/ShipmentsTable';
 import { shipments } from './data/mockShipments'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar';
+import ShipmentsFilters from './components/ShipmentsFilters';
 
 const countByStatus = (status) =>
   shipments.filter((shipment) => shipment.status === status).length
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [search, setSearch] = useState('')
+  const [status, setStatus] = useState('all')
+
+  const query = search.trim().toLowerCase()
+
+  const filteredShipments = shipments.filter((shipment) => {
+    const matchesStatus = status === 'all' || shipment.status === status
+
+    const matchesSearch = 
+      shipment.driver.toLowerCase().includes(query) || 
+      shipment.id.toLowerCase().includes(query) ||
+      shipment.origin.toLowerCase().includes(query) ||
+      shipment.destination.toLowerCase().includes(query)
+    
+    return matchesStatus && matchesSearch
+  })
+
+  console.log(filteredShipments.length)
 
   return (
     <div className="flex min-h-screen bg-slate-100">
@@ -26,9 +45,12 @@ export default function App() {
             <KpiCard title="Kechikkan" value={countByStatus('delayed')} />
           </section>
 
+          <ShipmentsFilters search={search} onSearchChanges={setSearch} status={status} onStatusChange={setStatus}/>
+
           <section className="mt-6">
-            <ShipmentsTable shipments={shipments} />
+            <ShipmentsTable shipments={filteredShipments} />
           </section>
+          
         </main>
       </div>
       
