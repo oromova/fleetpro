@@ -4,6 +4,7 @@ const emptyForm = { origin: '', destination: '', driver: '', eta: '' }
 
 export default function NewShipmentModal({ onClose, onSubmit }) {
   const [form, setForm] = useState(emptyForm)
+  const [errors, setErrors] = useState({})
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -12,7 +13,31 @@ export default function NewShipmentModal({ onClose, onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    const validationErrors = validate(form)
+    setErrors(validationErrors)
+
+    if (Object.keys(validationErrors).length > 0) return
+
     onSubmit(form)
+  }
+
+  const validate = (form) => {
+    const errors = {}
+
+    if (!form.origin.trim()) errors.origin = 'Jo\'natish shaharini kiriting'
+    if (!form.destination.trim()) errors.destination = 'Yetkazish shaharini kiriting'
+    if (!form.driver.trim()) errors.driver = 'Haydovchi ismini kiriting'
+    if (!form.eta) errors.eta = 'Sanani tanlang'
+
+    if (
+      form.origin.trim() &&
+      form.origin.trim().toLowerCase() === form.destination.trim().toLowerCase()
+    ) {
+      errors.destination = 'Shaharlar bir xil bo\'lmasligi kerak'
+    }
+
+    return errors
   }
 
   return (
@@ -23,19 +48,38 @@ export default function NewShipmentModal({ onClose, onSubmit }) {
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div>
             <label className="block text-sm font-medium text-slate-700" htmlFor="origin">Qayerdan</label>
-            <input id="origin" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-hidden" name="origin" value={form.origin} onChange={handleChange}/>
+            <input id="origin" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-hidden" name="origin" value={form.origin} onChange={handleChange} aria-invalid={errors.origin ? 'true' : 'false'} aria-describedby={errors.origin ? 'origin-error' : undefined}/>
+            {errors.origin && (
+              <p id="origin-error" role="alert" className="mt-1 text-sm text-red-600">
+                {errors.origin}
+              </p>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700" htmlFor="destination">Qayerga</label>
-            <input id="destination" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-hidden" name="destination" value={form.destination} onChange={handleChange}/>
+            <input id="destination" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-hidden" name="destination" value={form.destination} onChange={handleChange} aria-invalid={errors.destination ? 'true' : 'false'} aria-describedby={errors.destination ? 'destination-error' : undefined}/>
+            {errors.destination && (
+              <p id="destination-error" role="alert" className="mt-1 text-sm text-red-600">
+                {errors.destination}
+              </p>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700" htmlFor="driver">Haydovchi</label>
-            <input id="driver" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-hidden" name="driver" value={form.driver} onChange={handleChange}/>
+            <input id="driver" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-slate-200" name="driver" value={form.driver} onChange={handleChange} aria-invalid={errors.driver ? 'true' : 'false'} aria-describedby={errors.driver ? 'driver-error' : undefined}/>
+            {errors.driver && (
+              <p id="driver-error" role="alert" className="mt-1 text-sm text-red-600">
+                {errors.driver}
+              </p>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700" htmlFor="eta">Yetkazish sanasi</label>
-            <input id="eta" type="date" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-hidden" name="eta" value={form.eta} onChange={handleChange}/>
+            <input id="eta" type="date" name="eta" value={form.eta} onChange={handleChange} aria-invalid={errors.eta ? 'true' : 'false'} aria-describedby={errors.eta ? 'eta-error' : undefined} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"/>
+            {errors.eta && (
+              <p id="eta-error" role="alert" className="mt-1 text-sm text-red-600">{errors.eta}
+              </p>
+            )}
           </div>
           <div className="flex justify-end gap-3">
             <button type="button" onClick={onClose} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Bekor qilish</button>
