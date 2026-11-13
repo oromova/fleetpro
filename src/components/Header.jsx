@@ -1,5 +1,5 @@
-export default function Header({ onMenuClick }) {
-  
+export default function Header({ onMenuClick, onNewClick }) {
+
   return (
     <header className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 md:px-8 md:py-5">
       <div className="flex items-center gap-3">
@@ -12,7 +12,7 @@ export default function Header({ onMenuClick }) {
         <h1 className="text-xl font-bold text-slate-900">Dashboard</h1>
       </div>
 
-      <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" type="button">Yangi yuk</button>
+      <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" type="button" onClick={onNewClick}>Yangi yuk</button>
     </header>
   )
 }
