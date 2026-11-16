@@ -1,4 +1,12 @@
-const links = ["Dashboard", "Yuklar", "Haydovchi", "Mashinalar", "Xarita"]
+import { NavLink } from 'react-router-dom'
+
+const links = [
+  { label: 'Dashboard', to: '/' },
+  { label: 'Yuklar', to: '/shipments' },
+  { label: 'Haydovchi', to: '/haydovchi' },
+  // { label: 'Mashinalar', to: 'mashinalar' },
+  // { label: 'Xarita', to: '/xarita'}
+]
 
 export default function Sidebar({ open, onClose }) {
   return (
@@ -15,7 +23,9 @@ export default function Sidebar({ open, onClose }) {
 
       <nav aria-label="Asosiy menyu">
         {links.map((link) => (
-          <a className="block rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-blue-600 hover:text-white focus-visible:bg-blue-600 focus-visible:text-white focus-visible:outline-none transition-colors" key={link} href="#">{link}</a>
+          <NavLink key={link.to} to={link.to} end={link.to === '/'} onClick={onClose} className={({ isActive }) =>  `block rounded-lg px-3 py-2 text-sm transition-colors ${ isActive ? 'bg-blue-700 text-white' : 'text-slate-300 hover:bg-blue-600 hover:text-white'}`}>
+            {link.label}
+          </NavLink>
         ))}
       </nav>
     </aside>
