@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 const links = [
   { label: 'Dashboard', to: '/' },
   { label: 'Yuklar', to: '/shipments' },
-  { label: 'Haydovchi', to: '/haydovchi' },
+  // { label: 'Haydovchi', to: '/haydovchi' },
   // { label: 'Mashinalar', to: 'mashinalar' },
   // { label: 'Xarita', to: '/xarita'}
 ]
@@ -21,7 +21,7 @@ export default function Sidebar({ open, onClose }) {
         </button>
       </div>
 
-      <nav aria-label="Asosiy menyu">
+      <nav aria-label="Asosiy menyu" className="flex flex-col gap-1">
         {links.map((link) => (
           <NavLink key={link.to} to={link.to} end={link.to === '/'} onClick={onClose} className={({ isActive }) =>  `block rounded-lg px-3 py-2 text-sm transition-colors ${ isActive ? 'bg-blue-700 text-white' : 'text-slate-300 hover:bg-blue-600 hover:text-white'}`}>
             {link.label}
