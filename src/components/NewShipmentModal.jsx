@@ -2,17 +2,17 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-  const shipmentSchema = z
-    .object({
-      origin: z.string().trim().min(1, "Jo'natish shaharini kiriting"),
-      destination: z.string().trim().min(1, 'Yetkazish shaharini kiriting'),
-      driver: z.string().trim().min(1, 'Haydovchi ismini kiriting'),
-      eta: z.string().min(1, 'Sanani tanlang'),
-    })
-    .refine((data) => data.origin.toLowerCase() !== data.destination.toLowerCase(), {
-      message: "Shaharlar bir xil bo'lmasligi kerak",
-      path: ['destination'],
-    })
+const shipmentSchema = z
+  .object({
+    origin: z.string().trim().min(1, "Jo'natish shaharini kiriting"),
+    destination: z.string().trim().min(1, 'Yetkazish shaharini kiriting'),
+    driver: z.string().trim().min(1, 'Haydovchi ismini kiriting'),
+    eta: z.string().min(1, 'Sanani tanlang'),
+  })
+  .refine((data) => data.origin.toLowerCase() !== data.destination.toLowerCase(), {
+    message: "Shaharlar bir xil bo'lmasligi kerak",
+    path: ['destination'],
+  })
 
   const inputClass = (hasError) =>
   `mt-1 w-full rounded-lg border px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 ${
@@ -21,7 +21,7 @@ import { z } from 'zod'
       : 'border-slate-200 focus-visible:outline-blue-600'
   }`
 
-export default function NewShipmentModal({ onClose, onSubmit }) {
+export default function NewShipmentModal({ onClose, onSubmit, isSaving }) {
   const {
     register,
     handleSubmit,
@@ -103,12 +103,8 @@ export default function NewShipmentModal({ onClose, onSubmit }) {
           </div>
 
           <div className="flex justify-end gap-3">
-            <button type="button" onClick={onClose} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
-              Bekor qilish
-            </button>
-            <button type="submit" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
-              Saqlash
-            </button>
+            <button type="button" onClick={onClose} disabled={isSaving} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-60">Bekor qilish</button>
+            <button type="submit" disabled={isSaving} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60">{isSaving ? 'Saqlanmoqda...' : 'Saqlash'}</button>
           </div>
         </form>
       </div>
