@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ShipmentsFilters from '../components/ShipmentsFilters'
-import ShipmentsTable from '../components/ShipmentsTable'
+import ShipmentsDataTable from '../components/ShipmentsDataTable'
 
 export default function ShipmentsPage({ shipments }) {
   const [search, setSearch] = useState('')
@@ -24,7 +24,7 @@ export default function ShipmentsPage({ shipments }) {
     <>
       <h2 className="text-lg font-semibold text-slate-900">Yuklar</h2>
       <ShipmentsFilters search={search} onSearchChange={setSearch} status={status} onStatusChange={setStatus}/>
-      <ShipmentsTable shipments={filteredShipments} />
+      <ShipmentsDataTable shipments={filteredShipments} />
     </>
   )
 }
