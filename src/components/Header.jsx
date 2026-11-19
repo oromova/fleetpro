@@ -1,4 +1,17 @@
+import { useLocation } from 'react-router-dom'
+
+const titles = {
+  '/': 'Dashboard',
+  '/shipments': 'Yuklar',
+  '/drivers': 'Haydovchilar',
+}
+
+const pagesWithNewButton = ['/', '/shipments']
+
 export default function Header({ onMenuClick, onNewClick }) {
+  const { pathname } = useLocation()
+  const title = titles[pathname] ?? 'FleetPro'
+  const showNewButton = pagesWithNewButton.includes(pathname)
 
   return (
     <header className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 md:px-8 md:py-5">
@@ -9,10 +22,18 @@ export default function Header({ onMenuClick, onNewClick }) {
           </svg>
         </button>
 
-        <h1 className="text-xl font-bold text-slate-900">Dashboard</h1>
+        <h1 className="text-xl font-bold text-slate-900">{title}</h1>
       </div>
 
-      <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" type="button" onClick={onNewClick}>Yangi yuk</button>
+      {showNewButton && (
+        <button
+          type="button"
+          onClick={onNewClick}
+          className="cursor-pointer rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+        >
+          Yangi yuk
+        </button>
+      )}
     </header>
   )
 }
