@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar';
 import NewShipmentModal from './components/NewShipmentModal';
 import DashboardPage from './pages/DashboardPage'
 import ShipmentsPage from './pages/ShipmentsPage'
+import DriversPage from './pages/DriversPage'
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -47,6 +48,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<DashboardPage shipments={shipments} />} />
               <Route path="/shipments" element={<ShipmentsPage shipments={shipments} />} />
+              <Route path="/drivers" element={<DriversPage />} />
             </Routes>
           )}         
         </main>

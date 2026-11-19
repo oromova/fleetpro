@@ -22,7 +22,6 @@ export default function ShipmentsPage({ shipments }) {
 
   return (
     <>
-      <h2 className="text-lg font-semibold text-slate-900">Yuklar</h2>
       <ShipmentsFilters search={search} onSearchChange={setSearch} status={status} onStatusChange={setStatus}/>
       <ShipmentsDataTable shipments={filteredShipments} />
     </>
