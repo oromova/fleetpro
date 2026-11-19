@@ -4,8 +4,7 @@ const links = [
   { label: 'Dashboard', to: '/' },
   { label: 'Yuklar', to: '/shipments' },
   // { label: 'Haydovchi', to: '/haydovchi' },
-  // { label: 'Mashinalar', to: 'mashinalar' },
-  // { label: 'Xarita', to: '/xarita'}
+  { label: 'Xarita', to: '/map'}
 ]
 
 export default function Sidebar({ open, onClose }) {
