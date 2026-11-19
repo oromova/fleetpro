@@ -2,7 +2,7 @@
 
 A dispatcher dashboard for logistics companies. Track shipments, search, sort, and add new ones.
 
-**Live demo:** [[https://YOUR-LIVE-LINK](https://fleetpro-git-main-oromovas-projects.vercel.app/)](https://fleetpro-topaz.vercel.app)
+**Live demo:** [[https://YOUR-LIVE-LINK](https://fleetpro-git-main-oromovas-projects.vercel.app/)]
 
 ## Features
 
