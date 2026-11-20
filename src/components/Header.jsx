@@ -4,6 +4,7 @@ const titles = {
   '/': 'Dashboard',
   '/shipments': 'Yuklar',
   '/drivers': 'Haydovchilar',
+  '/map': 'Xarita',
 }
 
 const pagesWithNewButton = ['/', '/shipments']
@@ -26,13 +27,7 @@ export default function Header({ onMenuClick, onNewClick }) {
       </div>
 
       {showNewButton && (
-        <button
-          type="button"
-          onClick={onNewClick}
-          className="cursor-pointer rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-        >
-          Yangi yuk
-        </button>
+        <button type="button" onClick={onNewClick} className="cursor-pointer rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Yangi yuk</button>
       )}
     </header>
   )
