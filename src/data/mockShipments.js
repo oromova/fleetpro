@@ -6,5 +6,5 @@ export const shipments = [
   { id: 'FP-1005', origin: 'Samarqand', destination: 'Qarshi', driver: 'Otabek Nazarov', status: 'in_transit', eta: '2026-11-07' },
   { id: 'FP-1006', origin: 'Toshkent', destination: 'Nukus', driver: 'Dilshod Ergashev', status: 'delayed', eta: '2026-11-06' },
   { id: 'FP-1007', origin: 'Farg\'ona', destination: 'Toshkent', driver: 'Eldor Qodirov', status: 'delivered', eta: '2026-11-04' },
-  { id: 'FP-1008', origin: 'Urganch', destination: 'Buxoro', driver: 'Rustam Salimov', status: 'pending', eta: '2026-11-11' },
+  { id: 'FP-1008', origin: 'Urganch', destination: 'Buxoro', driver: 'Rustam Salimov', status: 'in_transit', eta: '2026-11-11' },
 ]

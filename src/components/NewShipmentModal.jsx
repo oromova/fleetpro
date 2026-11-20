@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { cities } from '../data/cities'
+
+const cityNames = Object.keys(cities)
 
 const shipmentSchema = z
   .object({
-    origin: z.string().trim().min(1, "Jo'natish shaharini kiriting"),
-    destination: z.string().trim().min(1, 'Yetkazish shaharini kiriting'),
+    origin: z.string().min(1, "Jo'natish shaharini tanlang"),
+    destination: z.string().min(1, 'Yetkazish shaharini tanlang'),
     driver: z.string().trim().min(1, 'Haydovchi ismini kiriting'),
     eta: z.string().min(1, 'Sanani tanlang'),
   })
@@ -39,13 +42,12 @@ export default function NewShipmentModal({ onClose, onSubmit, isSaving }) {
         <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4">
           <div>
             <label className="block text-sm font-medium text-slate-700" htmlFor="origin">Qayerdan</label>
-            <input
-              id="origin"
-              className={inputClass(errors.origin)}
-              aria-invalid={errors.origin ? 'true' : 'false'}
-              aria-describedby={errors.origin ? 'origin-error' : undefined}
-              {...register('origin')}
-            />
+            <select id="origin" className={inputClass(errors.origin)} aria-invalid={errors.origin ? 'true' : 'false'} aria-describedby={errors.origin ? 'origin-error' : undefined} {...register('origin')}>
+              <option value="">Tanlang</option>
+              {cityNames.map((city) => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </select>
             {errors.origin && (
               <p id="origin-error" role="alert" className="mt-1 text-sm text-red-600">
                 {errors.origin.message}
@@ -55,13 +57,12 @@ export default function NewShipmentModal({ onClose, onSubmit, isSaving }) {
 
           <div>
             <label className="block text-sm font-medium text-slate-700" htmlFor="destination">Qayerga</label>
-            <input
-              id="destination"
-              className={inputClass(errors.destination)}
-              aria-invalid={errors.destination ? 'true' : 'false'}
-              aria-describedby={errors.destination ? 'destination-error' : undefined}
-              {...register('destination')}
-            />
+            <select id="destination" className={inputClass(errors.destination)} aria-invalid={errors.destination ? 'true' : 'false'} aria-describedby={errors.destination ? 'destination-error' : undefined} {...register('destination')}>
+              <option value="">Tanlang</option>
+              {cityNames.map((city) => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </select>
             {errors.destination && (
               <p id="destination-error" role="alert" className="mt-1 text-sm text-red-600">
                 {errors.destination.message}
@@ -71,34 +72,17 @@ export default function NewShipmentModal({ onClose, onSubmit, isSaving }) {
 
           <div>
             <label className="block text-sm font-medium text-slate-700" htmlFor="driver">Haydovchi</label>
-            <input
-              id="driver"
-              className={inputClass(errors.driver)}
-              aria-invalid={errors.driver ? 'true' : 'false'}
-              aria-describedby={errors.driver ? 'driver-error' : undefined}
-              {...register('driver')}
-            />
+            <input id="driver" className={inputClass(errors.driver)} aria-invalid={errors.driver ? 'true' : 'false'} aria-describedby={errors.driver ? 'driver-error' : undefined}{...register('driver')}/>
             {errors.driver && (
-              <p id="driver-error" role="alert" className="mt-1 text-sm text-red-600">
-                {errors.driver.message}
-              </p>
+              <p id="driver-error" role="alert" className="mt-1 text-sm text-red-600">{errors.driver.message}</p>
             )}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-slate-700" htmlFor="eta">Yetkazish sanasi</label>
-            <input
-              id="eta"
-              type="date"
-              className={inputClass(errors.eta)}
-              aria-invalid={errors.eta ? 'true' : 'false'}
-              aria-describedby={errors.eta ? 'eta-error' : undefined}
-              {...register('eta')}
-            />
+            <input id="eta" type="date" className={inputClass(errors.eta)} aria-invalid={errors.eta ? 'true' : 'false'} aria-describedby={errors.eta ? 'eta-error' : undefined}{...register('eta')}/>
             {errors.eta && (
-              <p id="eta-error" role="alert" className="mt-1 text-sm text-red-600">
-                {errors.eta.message}
-              </p>
+              <p id="eta-error" role="alert" className="mt-1 text-sm text-red-600">{errors.eta.message}</p>
             )}
           </div>
 

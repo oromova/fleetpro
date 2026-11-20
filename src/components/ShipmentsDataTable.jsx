@@ -29,7 +29,7 @@ export default function ShipmentsDataTable({ shipments }) {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    initialState: { pagination: { pageSize: 5 } },
+    initialState: { pagination: { pageSize: 10 } },
   })
 
   if (shipments.length === 0) {
@@ -46,11 +46,8 @@ export default function ShipmentsDataTable({ shipments }) {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th key={header.id}
-                    scope="col"
-                    aria-sort={{ asc: 'ascending', desc: 'descending' }[header.column.getIsSorted()] ?? 'none'}
-                    className="px-4 py-3">
-                    <button type="button" onClick={header.column.getToggleSortingHandler()} className="flex items-center gap-1 font-semibold hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                  <th key={header.id} scope="col" aria-sort={{ asc: 'ascending', desc: 'descending' }[header.column.getIsSorted()] ?? 'none'} className="px-4 py-3">
+                    <button type="button" onClick={header.column.getToggleSortingHandler()} className="flex cursor-pointer items-center gap-1 font-semibold hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       <span aria-hidden="true">{{ asc: '↑', desc: '↓' }[header.column.getIsSorted()] ?? ''}</span>
                     </button>
@@ -74,7 +71,15 @@ export default function ShipmentsDataTable({ shipments }) {
         </table>
       </div>
 
-      {/* 2-TOPSHIRIQ: pagination boshqaruvi */}
+      {table.getPageCount() > 1 && (
+        <div className="flex items-center justify-between">
+          <button type="button" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()} className="cursor-pointer rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">Oldingi</button>
+
+          <span aria-live="polite" className="text-sm text-slate-600">{table.getState().pagination.pageIndex + 1} / {table.getPageCount()}</span>
+
+          <button type="button" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()} className="cursor-pointer rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">Keyingi</button>
+        </div>
+      )}
     </div>
   )
 }
