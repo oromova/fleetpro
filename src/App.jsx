@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react'
+import { connectShipmentSocket } from './api/fakeSocket'
 import { Routes, Route } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchShipments, createShipment } from './api/shipments'
@@ -28,6 +29,18 @@ export default function App() {
       setIsModalOpen(false)
     },
   })
+
+  useEffect(() => {
+    const disconnect = connectShipmentSocket((message) => {
+      queryClient.setQueryData(['shipments'], (old) =>
+        old?.map((shipment) =>
+          shipment.id === message.shipment.id ? message.shipment : shipment,
+        ),
+      )
+    })
+
+    return disconnect
+  }, [queryClient])
 
   return (
     <div className="flex min-h-screen bg-slate-100">
