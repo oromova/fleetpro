@@ -1,5 +1,6 @@
 import KpiCard from '../components/KpiCard'
 import ShipmentsTable from '../components/ShipmentsTable'
+import { Link } from 'react-router-dom'
 
 export default function DashboardPage({ shipments }) {
   const countByStatus = (status) =>
@@ -16,7 +17,8 @@ export default function DashboardPage({ shipments }) {
 
       <section aria-labelledby="recent-title" className="space-y-3">
         <h2 id="recent-title" className="text-lg font-semibold text-slate-900">So'nggi yuklar</h2>
-        <ShipmentsTable shipments={shipments.slice(0, 5)} />
+        <ShipmentsTable shipments={shipments.slice(0, 8)} />
+        <Link to="/shipments" className="text-sm font-medium text-blue-700 hover:text-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Hammasini ko'rish</Link>
       </section>
     </>
   )
