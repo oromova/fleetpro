@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react'
+import { connectShipmentSocket } from './api/fakeSocket'
 import { Routes, Route } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchShipments, createShipment } from './api/shipments'
@@ -7,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import NewShipmentModal from './components/NewShipmentModal';
 import DashboardPage from './pages/DashboardPage'
 import ShipmentsPage from './pages/ShipmentsPage'
+import MapPage from './pages/MapPage';
 import DriversPage from './pages/DriversPage'
 
 export default function App() {
@@ -28,6 +30,18 @@ export default function App() {
     },
   })
 
+  useEffect(() => {
+    const disconnect = connectShipmentSocket((message) => {
+      queryClient.setQueryData(['shipments'], (old) =>
+        old?.map((shipment) =>
+          shipment.id === message.shipment.id ? message.shipment : shipment,
+        ),
+      )
+    })
+
+    return disconnect
+  }, [queryClient])
+
   return (
     <div className="flex min-h-screen bg-slate-100">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)}/>
@@ -48,6 +62,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<DashboardPage shipments={shipments} />} />
               <Route path="/shipments" element={<ShipmentsPage shipments={shipments} />} />
+              <Route path="/map" element={<MapPage shipments={shipments} />} />
               <Route path="/drivers" element={<DriversPage />} />
             </Routes>
           )}         
