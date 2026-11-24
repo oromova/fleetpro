@@ -1,25 +1,30 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel, flexRender } from '@tanstack/react-table'
 import StatusBadge from './StatusBadge'
 
-const columns = [
-  { accessorKey: 'id', header: 'ID' },
-  {
-    id: 'route',
-    header: "Yo'nalish",
-    accessorFn: (row) => `${row.origin} → ${row.destination}`,
-  },
-  { accessorKey: 'driver', header: 'Haydovchi' },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ getValue }) => <StatusBadge status={getValue()} />,
-  },
-  { accessorKey: 'eta', header: 'ETA' },
-]
-
 export default function ShipmentsDataTable({ shipments }) {
+  const { t } = useTranslation()
   const [sorting, setSorting] = useState([])
+
+  const columns = useMemo(
+    () => [
+      { accessorKey: 'id', header: t('table.id') },
+      {
+        id: 'route',
+        header: t('table.route'),
+        accessorFn: (row) =>`${t(`cities.${row.origin}`, { defaultValue: row.origin })} → ${t(`cities.${row.destination}`, { defaultValue: row.destination })}`,
+      },
+      { accessorKey: 'driver', header: t('table.driver') },
+      {
+        accessorKey: 'status',
+        header: t('table.status'),
+        cell: ({ getValue }) => <StatusBadge status={getValue()} />,
+      },
+      { accessorKey: 'eta', header: t('table.eta') },
+    ],
+  [t],
+)
 
   const table = useReactTable({
     data: shipments,
@@ -34,7 +39,7 @@ export default function ShipmentsDataTable({ shipments }) {
 
   if (shipments.length === 0) {
     return (
-      <p role="status" className="rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">Yuk topilmadi</p>
+      <p role="status" className="rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">{t('table.empty')}</p>
     )
   }
 
@@ -73,11 +78,11 @@ export default function ShipmentsDataTable({ shipments }) {
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-between">
-          <button type="button" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()} className="cursor-pointer rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">Oldingi</button>
+          <button type="button" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()} className="cursor-pointer rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">{t('table.prev')}</button>
 
           <span aria-live="polite" className="text-sm text-slate-600">{table.getState().pagination.pageIndex + 1} / {table.getPageCount()}</span>
 
-          <button type="button" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()} className="cursor-pointer rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">Keyingi</button>
+          <button type="button" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()} className="cursor-pointer rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">{t('table.next')}</button>
         </div>
       )}
     </div>

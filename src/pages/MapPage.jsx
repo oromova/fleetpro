@@ -1,8 +1,13 @@
 import { MapContainer, TileLayer, CircleMarker, Polyline, Tooltip } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { cities } from '../data/cities'
+import { useTranslation } from 'react-i18next'
 
 export default function MapPage({ shipments }) {
+  const { t } = useTranslation()
+
+  const cityName = (name) => t(`cities.${name}`, { defaultValue: name })
+
   const activeRoutes = shipments.filter(
     (shipment) =>
       shipment.status === 'in_transit' &&
@@ -17,7 +22,7 @@ export default function MapPage({ shipments }) {
 
         {activeRoutes.map((shipment) => (
           <Polyline key={shipment.id} positions={[cities[shipment.origin], cities[shipment.destination]]} pathOptions={{ color: '#1D4ED8', weight: 3, dashArray: '6 8' }}>
-            <Tooltip sticky>{shipment.id}: {shipment.origin} → {shipment.destination}</Tooltip>
+            <Tooltip sticky>{shipment.id}: {cityName(shipment.origin)} → {cityName(shipment.destination)}</Tooltip>
           </Polyline>
         ))}
 
@@ -26,7 +31,7 @@ export default function MapPage({ shipments }) {
 
           return (
             <CircleMarker key={name} center={position} radius={8} pathOptions={{ color: '#2563EB', fillColor: '#2563EB', fillOpacity: 0.8 }}>
-              <Tooltip>{name}: {count} ta yuk</Tooltip>
+              <Tooltip>{cityName(name)}: {t('map.shipmentsCount', { count })}</Tooltip>
             </CircleMarker>
           )
         })}
