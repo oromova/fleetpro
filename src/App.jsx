@@ -3,6 +3,7 @@ import { connectShipmentSocket } from './api/fakeSocket'
 import { Routes, Route } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchShipments, createShipment } from './api/shipments'
+import { useTranslation } from 'react-i18next'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar';
 import NewShipmentModal from './components/NewShipmentModal';
@@ -12,6 +13,7 @@ import MapPage from './pages/MapPage';
 import DriversPage from './pages/DriversPage'
 
 export default function App() {
+  const { t } = useTranslation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -51,11 +53,11 @@ export default function App() {
 
         <main className="mx-auto w-full max-w-6xl space-y-6 p-4 md:p-8">
           {isPending && (
-            <p role="status" className="rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">Yuklanmoqda...</p>
+            <p role="status" className="rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">{t('common.loading')}</p>
           )}
 
           {isError && (
-            <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-8 text-center text-sm text-red-700">Ma'lumotni yuklab bo'lmadi</p>
+            <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-8 text-center text-sm text-red-700">{t('common.error')}</p>
           )}
 
           {!isPending && !isError && (
