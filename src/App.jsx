@@ -11,6 +11,7 @@ import DashboardPage from './pages/DashboardPage'
 import ShipmentsPage from './pages/ShipmentsPage'
 import MapPage from './pages/MapPage';
 import DriversPage from './pages/DriversPage'
+import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
   const { t } = useTranslation()
@@ -66,6 +67,7 @@ export default function App() {
               <Route path="/shipments" element={<ShipmentsPage shipments={shipments} />} />
               <Route path="/map" element={<MapPage shipments={shipments} />} />
               <Route path="/drivers" element={<DriversPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           )}         
         </main>
