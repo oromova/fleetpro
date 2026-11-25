@@ -31,7 +31,7 @@ export default function ShipmentsTable({ shipments }) {
                 {t(`cities.${shipment.origin}`, { defaultValue: shipment.origin })} →{' '}
                 {t(`cities.${shipment.destination}`, { defaultValue: shipment.destination })}
               </td>
-              <td className="px-4 py-3">{shipment.driver}</td>
+              <td className="px-4 py-3">{t(`people.${shipment.driver}`, { defaultValue: shipment.driver })}</td>
               <td className="px-4 py-3"><StatusBadge status={shipment.status} /></td>
               <td className="px-4 py-3">{shipment.eta}</td>
             </tr>

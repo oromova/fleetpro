@@ -15,7 +15,11 @@ export default function ShipmentsDataTable({ shipments }) {
         header: t('table.route'),
         accessorFn: (row) =>`${t(`cities.${row.origin}`, { defaultValue: row.origin })} → ${t(`cities.${row.destination}`, { defaultValue: row.destination })}`,
       },
-      { accessorKey: 'driver', header: t('table.driver') },
+      {
+        id: 'driver',
+        header: t('table.driver'),
+        accessorFn: (row) => t(`people.${row.driver}`, { defaultValue: row.driver }),
+      },
       {
         accessorKey: 'status',
         header: t('table.status'),

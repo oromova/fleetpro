@@ -24,7 +24,6 @@ export default function DashboardPage({ shipments }) {
           <ShipmentsTable shipments={shipments.slice(0, 8)} />
           <Link to="/shipments" className="text-sm font-medium text-blue-700 hover:text-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">{t('dashboard.viewAll')}</Link>
         </div>
-        <ShipmentsTable shipments={shipments.slice(0, 5)}/>
       </section>
     </>
   )
