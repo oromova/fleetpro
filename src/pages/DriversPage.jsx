@@ -38,7 +38,7 @@ export default function DriversPage() {
           <li key={driver.id}>
             <div className="flex h-full flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4">
               <div className="flex items-start justify-between gap-2">
-                <h3 className="font-semibold text-slate-900">{driver.name}</h3>
+                <h3 className="font-semibold text-slate-900">{t(`people.${driver.name}`, { defaultValue: driver.name })}</h3>
                 <span className={`rounded-full px-2 py-1 text-xs font-medium ${className}`}>{label}</span>
               </div>
 

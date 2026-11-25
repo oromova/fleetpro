@@ -13,6 +13,7 @@ export default function ShipmentsPage({ shipments }) {
 
     const matchesSearch =
       shipment.driver.toLowerCase().includes(query) ||
+      t(`people.${shipment.driver}`, { defaultValue: shipment.driver }).toLowerCase().includes(query) ||
       shipment.id.toLowerCase().includes(query) ||
       shipment.origin.toLowerCase().includes(query) ||
       shipment.destination.toLowerCase().includes(query)

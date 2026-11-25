@@ -50,7 +50,7 @@ export default function NewShipmentModal({ onClose, onSubmit, isSaving }) {
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700" htmlFor="origin">{t('modal.origin')}{t('modal.origin')}</label>
+            <label className="block text-sm font-medium text-slate-700" htmlFor="origin">{t('modal.origin')}</label>
             <select id="origin" className={inputClass(errors.origin)} aria-invalid={errors.origin ? 'true' : 'false'} aria-describedby={errors.origin ? 'origin-error' : undefined} {...register('origin')}>
               <option value="">{t('modal.choose')}</option>
               {cityOptions}
