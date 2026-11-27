@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel, flexRender } from '@tanstack/react-table'
 import StatusBadge from './StatusBadge'
 
-export default function ShipmentsDataTable({ shipments }) {
+export default function ShipmentsDataTable({ shipments, onEdit, onDelete }) {
   const { t } = useTranslation()
   const [sorting, setSorting] = useState([])
 
@@ -26,8 +26,33 @@ export default function ShipmentsDataTable({ shipments }) {
         cell: ({ getValue }) => <StatusBadge status={getValue()} />,
       },
       { accessorKey: 'eta', header: t('table.eta') },
+      {
+        id: 'actions',
+        header: () => <span className="sr-only">{t('table.actions')}</span>,
+        enableSorting: false,
+        cell: ({ row }) => (
+          <div className="flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => onEdit(row.original)}
+              aria-label={t('actions.editLabel', { id: row.original.id })}
+              className="cursor-pointer rounded-lg border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >
+              {t('actions.edit')}
+            </button>
+            <button
+              type="button"
+              onClick={() => onDelete(row.original)}
+              aria-label={t('actions.deleteLabel', { id: row.original.id })}
+              className="cursor-pointer rounded-lg border border-red-200 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            >
+              {t('actions.delete')}
+            </button>
+          </div>
+        ),
+      },
     ],
-  [t],
+  [t, onEdit, onDelete],
 )
 
   const table = useReactTable({

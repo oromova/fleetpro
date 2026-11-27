@@ -10,7 +10,13 @@ export default {
     open: 'Menyuni ochish',
     close: 'Menyuni yopish',
   },
-  actions: { newShipment: 'Yangi yuk' },
+  actions: { 
+    newShipment: 'Yangi yuk',
+    edit: "Tahrirlash",
+    delete: "O'chirish",
+    editLabel: '{{id}} yukini tahrirlash',
+    deleteLabel: "{{id}} yukini o'chirish",
+  },
   dashboard: {
     totalShipments: 'Jami yuklar',
     inTransit: "Yo'lda",
@@ -35,6 +41,8 @@ export default {
     empty: 'Yuk topilmadi',
     prev: 'Oldingi',
     next: 'Keyingi',
+    actions: 'Amallar',
+    noData: "Hali yuklar yo'q. «Yangi yuk» tugmasi bilan qo'shing.",
   },
   cities: {
       Toshkent: 'Toshkent',
@@ -91,5 +99,9 @@ export default {
   searchPlaceholder: 'ID, shahar yoki haydovchi...',
   statusLabel: "Status bo'yicha filtr",
   all: 'Hammasi',
-},
+  },
+  confirm: {
+    deleteTitle: "Yukni o'chirish", 
+    deleteMessage: "{{id}} yukini o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi." 
+  },
 }

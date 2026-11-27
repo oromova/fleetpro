@@ -10,7 +10,13 @@ export default {
     open: 'Open menu',
     close: 'Close menu',
   },
-  actions: { newShipment: 'New shipment' },
+  actions: { 
+    newShipment: 'New shipment',
+    edit: 'Edit', 
+    delete: 'Delete', 
+    editLabel: 'Edit shipment {{id}}', 
+    deleteLabel: 'Delete shipment {{id}}'
+  },
   dashboard: {
     totalShipments: 'Total shipments',
     inTransit: 'In transit',
@@ -35,6 +41,8 @@ export default {
     empty: 'No shipments found',
     prev: 'Previous',
     next: 'Next',
+    actions: 'Actions',
+    noData: 'No shipments yet. Add one with the "New shipment" button.',
   },
   cities: {
       Toshkent: 'Tashkent',
@@ -91,5 +99,9 @@ export default {
   searchPlaceholder: 'ID, city or driver...',
   statusLabel: 'Filter by status',
   all: 'All',
-},
+  },
+  confirm: { 
+    deleteTitle: 'Delete shipment', 
+    deleteMessage: 'Delete shipment {{id}}? This action cannot be undone.' 
+  }
 }

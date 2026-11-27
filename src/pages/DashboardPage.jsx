@@ -21,8 +21,15 @@ export default function DashboardPage({ shipments }) {
       <section aria-labelledby="recent-title" className="space-y-3">
         <div>
           <h2 id="recent-title" className="text-lg font-semibold text-slate-900">{t('dashboard.recentTitle')}</h2>
-          <ShipmentsTable shipments={shipments.slice(0, 8)} />
-          <Link to="/shipments" className="text-sm font-medium text-blue-700 hover:text-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">{t('dashboard.viewAll')}</Link>
+          <ShipmentsTable shipments={shipments.slice(0, 5)} />
+          {shipments.length > 5 && (
+            <Link
+              to="/shipments"
+              className="text-sm font-medium text-blue-700 hover:text-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >
+              {t('dashboard.viewAll')}
+            </Link>
+          )}
         </div>
       </section>
     </>

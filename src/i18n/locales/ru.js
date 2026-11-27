@@ -10,7 +10,13 @@ export default {
     open: 'Открыть меню',
     close: 'Закрыть меню',
   },
-  actions: { newShipment: 'Новый груз' },
+  actions: { 
+    newShipment: 'Новый груз',
+    edit: 'Изменить', 
+    delete: 'Удалить', 
+    editLabel: 'Изменить груз {{id}}', 
+    deleteLabel: 'Удалить груз {{id}}'
+  },
   dashboard: {
     totalShipments: 'Всего грузов',
     inTransit: 'В пути',
@@ -35,6 +41,8 @@ export default {
     empty: 'Грузы не найдены',
     prev: 'Назад',
     next: 'Далее',
+    actions: 'Действия',
+    noData: 'Грузов пока нет. Добавьте их кнопкой «Новый груз».',
   },
   cities: {
     Toshkent: 'Ташкент',
@@ -91,5 +99,10 @@ export default {
   searchPlaceholder: 'ID, город или водитель...',
   statusLabel: 'Фильтр по статусу',
   all: 'Все',
-},
+  },
+  confirm: { 
+    deleteTitle: 'Удаление груза', 
+    deleteMessage: 'Удалить груз {{id}}? Это действие нельзя отменить.' 
+  },
+  noData: 'Грузов пока нет. Добавьте их кнопкой «Новый груз».',
 }
